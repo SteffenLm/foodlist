@@ -1,0 +1,58 @@
+<div *ngIf="$recipe | async as recipeDetail">
+  <mat-toolbar class="no-padding-left">
+    <button routerLink="../" mat-icon-button>
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span>{{ recipeDetail.recipeName }}</span>
+    <span style="flex: 1 1 auto"></span>
+    <button routerLink="edit" mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div style="margin-left: 10px; margin-top: 10px; margin-right: 10px">
+    <div *ngIf="recipeDetail.recipeSubstances.length > 0">
+      <h2 style="margin: 0">Zutaten</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let ingredient of recipeDetail.recipeSubstances">
+          {{ ingredient.substanceAmount | number }}
+          {{ unitTexts[+ingredient.substanceUnit.unitId] }}
+          {{ ingredient.substance.substanceName }}
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div *ngIf="recipeDetail.recipeSteps.length > 0">
+      <h2 style="margin: 0">Schritte</h2>
+      <mat-list>
+        <p *ngFor="let step of recipeDetail.recipeSteps">
+          {{ step.stepInstruction }}
+        </p>
+      </mat-list>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 5rem;
+      "
+      *ngIf="
+        recipeDetail.recipeSteps &&
+        recipeDetail.recipeSteps.length === 0 &&
+        recipeDetail.recipeSubstances &&
+        recipeDetail.recipeSubstances.length === 0
+      "
+    >
+      <div>
+        Du hast noch keine Schritte oder Zutaten zu diesem Rezept hinzugefügt.
+      </div>
+    </div>
+  </div>
+  <foodlist-fab-button
+    icon="add_shopping_cart"
+    (click)="onAddToFudlist()"
+    *ngIf="
+      recipeDetail.recipeSubstances && recipeDetail.recipeSubstances.length > 0
+    "
+  >
+  </foodlist-fab-button>
+</div>

@@ -1,0 +1,20 @@
+<button
+  class="default-button"
+  type="submit"
+  [disabled]="disabled"
+  mat-raised-button
+  color="primary"
+>
+  <div *ngIf="!this.showLoadingSpinner; else progressBar">
+    <ng-content></ng-content>
+  </div>
+</button>
+
+<ng-template #progressBar>
+  <mat-spinner
+    class="default-spinner"
+    diameter="26"
+    color="accent"
+    mode="indeterminate"
+  ></mat-spinner>
+</ng-template>

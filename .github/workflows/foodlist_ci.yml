@@ -1,0 +1,30 @@
+name: Foodlist Continous Integration
+on:
+  pull_request:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: check for unformatted files
+        run: npm run prettier:check
+
+      - name: lint affected code
+        run: npm run ci:lint
+
+      - name: test affected code
+        run: npm run ci:test

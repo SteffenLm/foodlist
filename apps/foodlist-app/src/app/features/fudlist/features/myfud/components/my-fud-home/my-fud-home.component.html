@@ -1,0 +1,25 @@
+<div style="width: 100%; overflow: hidden; overflow-y: hidden">
+  <div>
+    <nav
+      backgroundColor="accent"
+      mat-align-tabs="center"
+      [tabPanel]="tabPanel"
+      mat-tab-nav-bar
+    >
+      <a
+        *ngFor="let linkItem of linksItems"
+        mat-tab-link
+        (click)="activeLink = linkItem.link"
+        [active]="activeLink === linkItem.link"
+        [routerLink]="linkItem.link"
+        [ngClass]="{ 'full-opacity': activeLink === linkItem.link }"
+      >
+        {{ linkItem.text }}
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  </div>
+  <div class="fixContent">
+    <router-outlet></router-outlet>
+  </div>
+</div>

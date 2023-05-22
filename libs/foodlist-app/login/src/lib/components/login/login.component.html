@@ -1,0 +1,38 @@
+<mat-toolbar>
+  <span>FUDLIST</span>
+</mat-toolbar>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  {{ errorMessage | async }}
+  <mat-form-field>
+    <mat-label for="username">Benutzername</mat-label>
+    <input
+      formControlName="username"
+      id="username"
+      type="text"
+      placeholder="Benutzername"
+      matInput
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label for="password">Passwort</mat-label>
+    <input
+      formControlName="password"
+      id="password"
+      type="password"
+      placeholder="Passwort"
+      matInput
+    />
+  </mat-form-field>
+  <button color="primary" mat-raised-button [disabled]="!loginForm.valid">
+    anmelden
+  </button>
+  <mat-divider></mat-divider>
+  <button
+    color="accent"
+    mat-raised-button
+    type="button"
+    (click)="onRegisterClicked()"
+  >
+    registrieren
+  </button>
+</form>

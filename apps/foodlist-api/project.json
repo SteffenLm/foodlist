@@ -1,0 +1,113 @@
+{
+  "name": "foodlist-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/foodlist-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/foodlist-api",
+        "main": "apps/foodlist-api/src/main.ts",
+        "tsConfig": "apps/foodlist-api/tsconfig.app.json",
+        "assets": ["apps/foodlist-api/src/assets"],
+        "generatePackageJson": true,
+        "target": "node",
+        "compiler": "tsc"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/foodlist-api/src/environments/environment.ts",
+              "with": "apps/foodlist-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "build docker image": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker build . -f apps/foodlist-api/src/Dockerfile -t foodlist-api:latest"
+          }
+        ]
+      }
+    },
+    "push to registry": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker tag foodlist-api registry.digitalocean.com/bemerkenswert/foodlist:api-latest"
+          },
+          {
+            "command": "docker push registry.digitalocean.com/bemerkenswert/foodlist:api-latest"
+          }
+        ],
+        "parallel": false
+      }
+    },
+    "build-testdata-image": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker build . -t foodlist-api-testdata-image:latest"
+          }
+        ],
+        "cwd": "apps/foodlist-api/db"
+      }
+    },
+    "run-testdata-container": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker run --name foodlist-api-testdata -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d --rm foodlist-api-testdata-image:latest"
+          }
+        ],
+        "cwd": "apps/foodlist-api/db"
+      }
+    },
+    "stop-testdata-container": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker stop foodlist-api-testdata"
+          }
+        ],
+        "cwd": "apps/foodlist-api/db"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "foodlist-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/foodlist-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/foodlist-api"],
+      "options": {
+        "jestConfig": "apps/foodlist-api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

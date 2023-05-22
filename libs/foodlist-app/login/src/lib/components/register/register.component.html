@@ -1,0 +1,67 @@
+<mat-toolbar>
+  <button routerLink="../" mat-icon-button>
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span>REGISTRIERUNG</span>
+  <span style="flex: 1 1 auto"></span>
+</mat-toolbar>
+
+<mat-vertical-stepper #stepper>
+  <mat-step
+    [stepControl]="usernameFormGroup"
+    errorMessage="Benutzername ist erforderlich."
+  >
+    <form [formGroup]="usernameFormGroup">
+      <ng-template matStepLabel>Gib deinen Benutzernamen ein</ng-template>
+      <mat-form-field>
+        <mat-label>Benutzername</mat-label>
+        <input matInput placeholder="Benutzername" formControlName="username" />
+      </mat-form-field>
+      <div>
+        <button
+          mat-button
+          matStepperNext
+          [disabled]="usernameFormGroup.invalid"
+        >
+          Weiter
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step
+    [stepControl]="passwordFormGroup"
+    errorMessage="Passwort ist erforderlich."
+  >
+    <form [formGroup]="passwordFormGroup">
+      <ng-template matStepLabel>Erstelle ein Passwort</ng-template>
+      <mat-form-field>
+        <mat-label>Passwort</mat-label>
+        <input
+          matInput
+          placeholder="Passwort"
+          formControlName="password"
+          type="password"
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Zurück</button>
+        <button
+          mat-button
+          matStepperNext
+          [disabled]="passwordFormGroup.invalid"
+        >
+          Weiter
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Fertig!</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Zurück</button>
+      <button routerLink="/auth/login" mat-button>
+        Registrierung abschließen
+      </button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

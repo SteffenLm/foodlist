@@ -1,0 +1,17 @@
+$footerheight: 20;
+$footerpadding: 20px;
+
+.content {
+  padding-bottom: $footerheight + (2 * $footerpadding);
+}
+
+.footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding-top: $footerpadding;
+  padding-bottom: $footerpadding;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

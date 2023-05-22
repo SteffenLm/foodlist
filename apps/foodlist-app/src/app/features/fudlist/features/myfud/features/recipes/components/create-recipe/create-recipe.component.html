@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <span>Rezept erstellen</span>
+  <span style="flex: 1 1 auto"></span>
+  <button tabindex="-1" mat-dialog-close mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form style="margin: 1rem" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    "
+  >
+    <mat-form-field style="width: 95%">
+      <mat-label for="name">Rezeptname</mat-label>
+      <input
+        formControlName="name"
+        id="name"
+        type="text"
+        placeholder="Apfelporridge"
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field style="width: 95%">
+      <mat-label for="portions">Portionen</mat-label>
+      <input
+        formControlName="portions"
+        id="portions"
+        type="number"
+        placeholder="2"
+        matInput
+      />
+    </mat-form-field>
+    <button
+      color="primary"
+      style="margin-bottom: 10px; width: 95%"
+      type="submit"
+      mat-raised-button
+      [disabled]="this.recipeForm.invalid"
+    >
+      Los geht's
+    </button>
+  </div>
+</form>

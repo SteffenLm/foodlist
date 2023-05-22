@@ -1,0 +1,27 @@
+{
+  "name": "foodlist-app-shopping-list",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/foodlist-app/shopping-list/src",
+  "prefix": "foodlist",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/foodlist-app/shopping-list"],
+      "options": {
+        "jestConfig": "libs/foodlist-app/shopping-list/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/foodlist-app/shopping-list/src/**/*.ts",
+          "libs/foodlist-app/shopping-list/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

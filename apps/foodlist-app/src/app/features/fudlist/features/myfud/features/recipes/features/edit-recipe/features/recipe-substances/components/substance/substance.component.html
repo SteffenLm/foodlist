@@ -1,0 +1,101 @@
+<mat-toolbar color="primary">
+  <span *ngIf="mode === operationMode.create">Zutat auswählen</span>
+  <span *ngIf="mode === operationMode.edit">Zutat ändern</span>
+  <span class="toolbar-spacer"></span>
+  <button
+    tabindex="-1"
+    *ngIf="mode === operationMode.edit"
+    (click)="onClose()"
+    mat-icon-button
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<form
+  style="margin: 1rem"
+  [formGroup]="recipeSubstanceForm.asFormGroup()"
+  (ngSubmit)="onSubmit()"
+>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    "
+  >
+    <mat-error *ngIf="errorMessage.length > 0" style="margin-bottom: 1rem">
+      {{ errorMessage }}
+    </mat-error>
+    <mat-form-field style="width: 95%">
+      <mat-label for="substance">Zutat</mat-label>
+      <input
+        id="substance"
+        type="text"
+        formControlName="substance"
+        [matAutocomplete]="auto"
+        matInput
+      />
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto="matAutocomplete"
+        [displayWith]="displaySubstanceName"
+      >
+        <mat-option
+          *ngFor="let substance of $filteredSubstances | async"
+          [value]="substance"
+        >
+          {{ substance.substanceName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field style="width: 95%">
+      <mat-label for="amount">Menge</mat-label>
+      <input formControlName="amount" id="amount" matInput type="number" />
+    </mat-form-field>
+    <mat-form-field style="width: 95%">
+      <mat-label for="unit">Einheit</mat-label>
+      <mat-select formControlName="unit" id="unit">
+        <mat-option
+          *ngFor="let unitText of unitTexts; let i = index"
+          [value]="i"
+        >
+          {{ unitText }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div
+      style="
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+      "
+    >
+      <button
+        *ngIf="mode === operationMode.create"
+        (click)="onAbort()"
+        type="button"
+        mat-button
+      >
+        Abbrechen
+      </button>
+      <button
+        *ngIf="mode === operationMode.edit"
+        (click)="onDelete()"
+        type="button"
+        mat-button
+      >
+        Löschen
+      </button>
+      <foodlist-loading-spinner-button
+        [showLoadingSpinner]="showLoadingSpinner"
+        [disabled]="recipeSubstanceForm.asFormGroup().invalid"
+      >
+        Speichern
+      </foodlist-loading-spinner-button>
+    </div>
+  </div>
+</form>

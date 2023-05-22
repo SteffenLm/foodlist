@@ -1,0 +1,46 @@
+<mat-toolbar *ngIf="shoppingList$ | async as sl" style="padding-left: 0">
+  <button routerLink="../" mat-icon-button>
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <span>
+    {{ sl.name }}
+  </span>
+  <span style="flex: 1 1 auto"></span>
+</mat-toolbar>
+
+<mat-selection-list>
+  <mat-list-option *ngFor="let openItem of openItems$ | async">
+    {{ openItem.getItemText() }}
+  </mat-list-option>
+</mat-selection-list>
+<mat-selection-list>
+  <mat-list-option
+    selected="true"
+    *ngFor="let closedItem of closedItems$ | async"
+  >
+    <div style="text-decoration: line-through">
+      {{ closedItem.getItemText() }}
+    </div>
+  </mat-list-option>
+</mat-selection-list>
+<div style="padding-left: 16px; padding-right: 16px">
+  <mat-form-field>
+    <mat-label>Hinzufügen</mat-label>
+    <input #input matInput type="text" />
+  </mat-form-field>
+  <button (click)="addToList(input.value); input.value = ''" mat-icon-button>
+    <mat-icon> add </mat-icon>
+  </button>
+</div>
+<div
+  style="
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+  "
+>
+  <button color="primary" mat-raised-button (click)="onFinish()">
+    Fertig mit shoppen
+  </button>
+</div>

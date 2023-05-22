@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@foodlist/foodlist-api/app-users": [
+        "libs/foodlist-api/app-users/src/index.ts"
+      ],
+      "@foodlist/foodlist-api/auth": ["libs/foodlist-api/auth/src/index.ts"],
+      "@foodlist/foodlist-api/typeorm-entities": [
+        "libs/foodlist-api/typeorm-entities/src/index.ts"
+      ],
+      "@foodlist/foodlist-api/units": ["libs/foodlist-api/units/src/index.ts"],
+      "@foodlist/foodlist-app-shopping-list": [
+        "libs/foodlist-app/shopping-list/src/index.ts"
+      ],
+      "@foodlist/foodlist-app/auth": ["libs/foodlist-app/auth/src/index.ts"],
+      "@foodlist/foodlist-app/login": ["libs/foodlist-app/login/src/index.ts"],
+      "@foodlist/foodlist-app/storage": [
+        "libs/foodlist-app/storage/src/index.ts"
+      ],
+      "@foodlist/foodlist-app/ui": ["libs/foodlist-app/ui/src/index.ts"],
+      "@foodlist/foodlist/dto-model": ["libs/foodlist/dto-model/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

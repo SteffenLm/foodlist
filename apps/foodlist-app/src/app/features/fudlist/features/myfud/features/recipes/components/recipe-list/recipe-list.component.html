@@ -1,0 +1,13 @@
+<div>
+  <mat-nav-list>
+    <a
+      mat-list-item
+      *ngFor="let recipe of $ownRecipes | async"
+      [routerLink]="[recipe.recipeId]"
+    >
+      {{ recipe.recipeName }}
+    </a>
+  </mat-nav-list>
+</div>
+<foodlist-fab-button color="primary" (click)="onCreateRecipe()" icon="add">
+</foodlist-fab-button>

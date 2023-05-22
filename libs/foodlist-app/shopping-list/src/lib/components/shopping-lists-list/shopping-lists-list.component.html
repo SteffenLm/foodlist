@@ -1,0 +1,16 @@
+<mat-nav-list *ngIf="shoppingLists.length > 0">
+  <a
+    mat-list-item
+    (click)="onShoppingListClicked(shoppingList)"
+    *ngFor="let shoppingList of shoppingLists"
+  >
+    <div matListItemTitle>
+      {{ shoppingList.name }}
+    </div>
+    <!-- TODO add correct value and improve intent
+    <div matListItemLine>
+      5 items
+    </div>
+     -->
+  </a>
+</mat-nav-list>

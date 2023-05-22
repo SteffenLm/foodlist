@@ -1,0 +1,21 @@
+<mat-nav-list>
+  <div>
+    <a
+      *ngFor="
+        let substance of $selectedSubstances | async;
+        trackBy: getSubstanceId
+      "
+      mat-list-item
+      (click)="onListItemClicked(substance)"
+    >
+      {{ substance.substanceName }}
+    </a>
+  </div>
+</mat-nav-list>
+<foodlist-fab-button
+  *ngIf="$substanceType | async as substanceType"
+  icon="add"
+  color="primary"
+  (click)="onCreateSubstance(substanceType)"
+>
+</foodlist-fab-button>

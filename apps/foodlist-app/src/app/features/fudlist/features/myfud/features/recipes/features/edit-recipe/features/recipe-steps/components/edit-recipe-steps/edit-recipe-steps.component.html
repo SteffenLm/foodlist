@@ -1,0 +1,21 @@
+<div
+  *ngIf="$recipeSteps | async as recipeSteps"
+  cdkDropList
+  (cdkDropListDropped)="onStepOrderChanged($event, recipeSteps)"
+>
+  <mat-card
+    appearance="outlined"
+    *ngFor="let recipeStep of recipeSteps"
+    (click)="onStepClicked(recipeStep)"
+    cdkDrag
+    cdkDragLockAxis="y"
+    style="margin: 10px"
+  >
+    <mat-card-content>
+      {{ recipeStep.stepInstruction }}
+    </mat-card-content>
+  </mat-card>
+  <div *ngIf="recipeSteps.length === 0" class="center-childs">
+    Du hast noch keine Schritte zu diesem Rezept hinzugefügt.
+  </div>
+</div>

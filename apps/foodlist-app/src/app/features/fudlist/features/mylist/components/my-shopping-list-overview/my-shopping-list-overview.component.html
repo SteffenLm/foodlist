@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <span>Einkauflisten</span>
+  <span style="flex: 1 1 auto"></span>
+</mat-toolbar>
+<mat-nav-list>
+  <a
+    mat-list-item
+    *ngFor="let sl of shoppingLists$ | async"
+    [routerLink]="sl.shoppingListId"
+  >
+    {{ sl.name }}
+    <mat-icon>chevron_right</mat-icon>
+  </a>
+</mat-nav-list>
+
+<foodlist-fab-button
+  (click)="onAddShoppingList()"
+  icon="add"
+></foodlist-fab-button>

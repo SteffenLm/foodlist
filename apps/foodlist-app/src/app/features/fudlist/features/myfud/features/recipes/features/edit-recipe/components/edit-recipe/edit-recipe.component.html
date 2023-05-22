@@ -1,0 +1,42 @@
+<div>
+  <mat-toolbar class="no-padding-left">
+    <button routerLink="../" mat-icon-button>
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span>{{ recipeName }}</span>
+    <span style="flex: 1 1 auto"></span>
+  </mat-toolbar>
+  <mat-tab-group
+    [(selectedIndex)]="tabIndex"
+    style="min-height: 220px"
+    mat-align-tabs="center"
+  >
+    <mat-tab label="Übersicht">
+      <foodlist-edit-recipe-overview
+        style="min-height: 220px"
+        (currentRecipe)="onCurrentRecipe($event)"
+      ></foodlist-edit-recipe-overview>
+    </mat-tab>
+    <mat-tab label="Zutaten">
+      <foodlist-edit-recipe-substances></foodlist-edit-recipe-substances>
+    </mat-tab>
+    <mat-tab label="Schritte">
+      <foodlist-edit-recipe-steps></foodlist-edit-recipe-steps>
+    </mat-tab>
+  </mat-tab-group>
+
+  <div class="fixed-position" *ngIf="tabIndex !== 0" @fab-button>
+    <foodlist-fab-button
+      *ngIf="tabIndex === 1"
+      color="primary"
+      icon="add"
+      (click)="openAddSubstanceDialog()"
+    ></foodlist-fab-button>
+    <foodlist-fab-button
+      *ngIf="tabIndex === 2"
+      color="primary"
+      icon="add"
+      (click)="openAddStepDialog()"
+    ></foodlist-fab-button>
+  </div>
+</div>

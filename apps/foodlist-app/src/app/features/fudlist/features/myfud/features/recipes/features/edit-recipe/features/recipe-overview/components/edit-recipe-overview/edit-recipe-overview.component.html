@@ -1,0 +1,41 @@
+<form
+  *ngIf="$recipeOverview | async as recipeOverview"
+  style="
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+  "
+  [formGroup]="editRecipeForm"
+  (ngSubmit)="onSubmit(recipeOverview.recipeId)"
+>
+  <mat-form-field>
+    <mat-label for="name">Rezeptname</mat-label>
+    <input
+      id="name"
+      placeholder="Apfelporridge"
+      type="text"
+      formControlName="recipeName"
+      matInput
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label for="portions">Portionen</mat-label>
+    <input
+      id="portions"
+      placeholder="2"
+      type="number"
+      formControlName="recipeServings"
+      matInput
+    />
+  </mat-form-field>
+  <button
+    color="primary"
+    [disabled]="this.editRecipeForm.pristine || this.editRecipeForm.invalid"
+    mat-raised-button
+  >
+    Speichern
+  </button>
+</form>

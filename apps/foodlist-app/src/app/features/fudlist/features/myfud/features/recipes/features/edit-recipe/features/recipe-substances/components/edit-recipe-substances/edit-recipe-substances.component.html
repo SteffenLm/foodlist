@@ -1,0 +1,17 @@
+<div *ngIf="$recipeSubstances | async as recipeSubstances">
+  <mat-card
+    appearance="outlined"
+    style="margin: 10px"
+    *ngFor="let recipeSubstance of recipeSubstances"
+    (click)="onSubstanceClicked(recipeSubstance)"
+  >
+    <mat-card-content>
+      {{ recipeSubstance.substanceAmount }}
+      {{ unitTexts[+recipeSubstance.unit] }}
+      {{ recipeSubstance.substanceName }}
+    </mat-card-content>
+  </mat-card>
+  <div *ngIf="recipeSubstances.length === 0" class="center-childs">
+    Du hast noch keine Zutaten zu diesem Rezept hinzugefügt.
+  </div>
+</div>

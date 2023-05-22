@@ -1,0 +1,69 @@
+<div>
+  <h4>Rezept zur Einkaufsliste hinzufügen</h4>
+  <mat-form-field>
+    <mat-label>Wähle eine Liste</mat-label>
+    <mat-select #listselect required>
+      <!-- <mat-option
+                *ngFor="let list of lists"
+                [value]="list.listId"
+            >
+                {{ list.name }}
+            </mat-option> -->
+    </mat-select>
+  </mat-form-field>
+
+  <section>
+    <span>
+      <mat-checkbox
+        [disabled]="listselect.empty"
+        [checked]="true"
+        color="primary"
+      >
+        Zutaten
+      </mat-checkbox>
+    </span>
+    <div style="display: flex; flex-direction: column; margin-left: 15px">
+      <mat-checkbox
+        [disabled]="listselect.empty"
+        *ngFor="let ingredient of ingredients"
+        [checked]="true"
+      >
+        {{ ingredient.amount }} {{ unitTexts[0] }}
+        {{ ingredient.substance.substanceName }}
+      </mat-checkbox>
+    </div>
+  </section>
+  <section>
+    <span>
+      <mat-checkbox
+        [disabled]="listselect.empty"
+        [checked]="false"
+        color="primary"
+      >
+        Gewürze
+      </mat-checkbox>
+    </span>
+    <div style="display: flex; flex-direction: column; margin-left: 15px">
+      <mat-checkbox
+        [disabled]="listselect.empty"
+        *ngFor="let spice of spices"
+        [checked]="false"
+      >
+        {{ spice.substance.substanceName }}
+      </mat-checkbox>
+    </div>
+  </section>
+  <div
+    style="display: flex; flex-direction: row; justify-content: space-around"
+  >
+    <button (click)="this.dialogRef.close()" mat-button>Abbrechen</button>
+    <button
+      [disabled]="listselect.empty"
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit()"
+    >
+      Speichern
+    </button>
+  </div>
+</div>

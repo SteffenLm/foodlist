@@ -1,0 +1,31 @@
+<mat-toolbar color="primary">
+  <span>Einkaufsliste erstellen</span>
+  <span style="flex: 1 1 auto"></span>
+  <button tabindex="-1" (click)="onClose()" mat-icon-button>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form
+  style="display: flex; flex-direction: column; margin: 10px"
+  [formGroup]="createShoppingListFormGroup"
+  (ngSubmit)="onSubmit()"
+>
+  <mat-form-field>
+    <mat-label for="name">Listname</mat-label>
+    <input
+      formControlName="name"
+      id="name"
+      type="text"
+      placeholder="Lidel"
+      matInput
+    />
+  </mat-form-field>
+  <foodlist-loading-spinner-button
+    style="width: 100%"
+    [disabled]="this.createShoppingListFormGroup.invalid"
+    [showLoadingSpinner]="this.showLoadingSpinner"
+  >
+    Speichern
+  </foodlist-loading-spinner-button>
+</form>

@@ -1,0 +1,68 @@
+<mat-toolbar color="primary">
+  <span *ngIf="mode === operationMode.create">Schritt hinzufügen</span>
+  <span *ngIf="mode === operationMode.edit">Schritt ändern</span>
+  <span class="toolbar-spacer"></span>
+  <button
+    tabindex="-1"
+    *ngIf="mode === operationMode.edit"
+    (click)="onClose()"
+    mat-icon-button
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<form style="margin: 1rem" [formGroup]="addStepForm" (ngSubmit)="onSubmit()">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    "
+  >
+    <mat-form-field style="width: 95%">
+      <mat-label for="instruction">Anweisungen</mat-label>
+      <textarea
+        id="instruction"
+        cdkTextareaAutosize
+        matInput
+        name="instruction"
+        formControlName="instruction"
+      ></textarea>
+    </mat-form-field>
+
+    <div
+      style="
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+      "
+    >
+      <button
+        *ngIf="mode === operationMode.create"
+        (click)="onAbort()"
+        type="button"
+        mat-button
+      >
+        Abbrechen
+      </button>
+      <button
+        *ngIf="mode === operationMode.edit"
+        (click)="onDelete()"
+        type="button"
+        mat-button
+      >
+        Löschen
+      </button>
+      <foodlist-loading-spinner-button
+        [showLoadingSpinner]="this.showLoadingSpinner"
+        [disabled]="addStepForm.invalid"
+      >
+        Speichern
+      </foodlist-loading-spinner-button>
+    </div>
+  </div>
+</form>

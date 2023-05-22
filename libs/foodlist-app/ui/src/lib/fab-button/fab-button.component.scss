@@ -1,0 +1,15 @@
+.default-fab-button {
+  position: fixed;
+  bottom: 4rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+@media (min-width: 600px) {
+  .default-fab-button {
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    z-index: 100;
+  }
+}

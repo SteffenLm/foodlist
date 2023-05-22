@@ -1,0 +1,9 @@
+<mat-progress-bar
+  *ngIf="isLoading$ | async"
+  mode="indeterminate"
+></mat-progress-bar>
+<foodlist-shopping-lists-list
+  *ngIf="shoppingLists$ | async as shoppingLists"
+  [shoppingLists]="shoppingLists"
+  (listItemClick)="onShoppingListClicked($event)"
+></foodlist-shopping-lists-list>

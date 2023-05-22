@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.ts",
+    "../../libs/foodlist-app/storage/src/lib/local-storage.ts",
+    "../../libs/foodlist-app/auth/src/lib/jwt.module.ts"
+  ],
+  "compilerOptions": {
+    "types": ["jest", "node"]
+  },
+  "exclude": ["jest.config.ts"]
+}

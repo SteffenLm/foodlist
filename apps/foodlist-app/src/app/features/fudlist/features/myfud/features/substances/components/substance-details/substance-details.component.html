@@ -1,0 +1,62 @@
+<mat-toolbar color="primary">
+  <span
+    >{{ staticTemplateValues.substanceTypeName }}
+    {{ staticTemplateValues.actionName }}</span
+  >
+</mat-toolbar>
+<form style="margin: 1rem" [formGroup]="substanceForm" (ngSubmit)="onSubmit()">
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    "
+  >
+    <mat-form-field style="width: 95%">
+      <mat-label for="name">Bezeichnung</mat-label>
+      <input
+        formControlName="substanceName"
+        id="name"
+        type="text"
+        placeholder
+        matInput
+      />
+    </mat-form-field>
+    <mat-form-field style="width: 95%">
+      <mat-label for="defaultUnit">Einheit</mat-label>
+      <mat-select formControlName="defaultUnit" id="defaultUnit">
+        <mat-option
+          *ngFor="let unitText of unitTexts; let i = index"
+          [value]="i"
+        >
+          {{ unitText }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p style="width: 95%">
+      Du kannst bei der Einheit die übliche Einheit auswählen, im Rezept später
+      aber auch noch eine andere verwenden.
+    </p>
+    <div
+      style="
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+      "
+    >
+      <button type="button" (click)="onAbort()" mat-button>Abbrechen</button>
+      <button
+        type="submit"
+        color="primary"
+        mat-raised-button
+        [disabled]="!substanceForm.valid"
+      >
+        Speichern
+      </button>
+    </div>
+  </div>
+</form>
